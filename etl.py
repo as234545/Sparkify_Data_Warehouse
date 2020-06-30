@@ -2,13 +2,13 @@ import configparser
 import psycopg2
 from sql_queries import copy_table_queries, insert_table_queries
 
-
+""" loads log_data and song_data from S3 into staging tables  """
 def load_staging_tables(cur, conn):
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
-
+""" take data from the staging tables and put then into fact and dimension tables    """
 def insert_tables(cur, conn):
     for query in insert_table_queries:
         cur.execute(query)
